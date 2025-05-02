@@ -22,8 +22,24 @@
       enable = true;
       userName = "Tim Black";
       userEmail = "timblaktu@gmail.com";
+      extraConfig.credential = {
+        helper = "manager";
+        credentialStore = "cache";
+        "https://github.com".username = "timblaktu";
+      };
     };
   
+    ssh = {
+      matchBlocks = {
+        "github.com" = {
+          hostname = "github.com";
+          user = "timblaktu";
+          identityFile = "~/.ssh/id_ed25519";
+          identitiesOnly = true;
+        };
+      };
+    };
+
     nvf = {
       enable = true;
       settings = {
@@ -97,6 +113,7 @@
     dive
     gettext
     git
+    git-credential-manager
     htop
     pinentry-tty
     podman-compose

@@ -145,6 +145,9 @@
       terminus_font
       powerline-fonts
     ];
+    variables = {
+      EDITOR = "neovim";
+    };
     # extraInit = ''
     #     # point docker tools to podman sock on user login
     #     if [ -z "$DOCKER_HOST" -a -n "$XDG_RUNTIME_DIR" ]; then

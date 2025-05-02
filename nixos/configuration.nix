@@ -146,7 +146,7 @@
       powerline-fonts
     ];
     variables = {
-      EDITOR = "neovim";
+      EDITOR = "nvim";
     };
     # extraInit = ''
     #     # point docker tools to podman sock on user login

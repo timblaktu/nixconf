@@ -9,6 +9,7 @@
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-intel" "wl" ];
   boot.extraModulePackages = [ config.boot.kernelPackages.broadcom_sta ];
+  boot.consoleLogLevel = 7;
 
   fileSystems."/" =
     { device = "/dev/disk/by-uuid/8a646289-e6bb-4fbe-b086-002392ccb92f";

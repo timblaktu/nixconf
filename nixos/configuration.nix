@@ -1,4 +1,10 @@
-{ inputs, lib, config, pkgs, ... }: {
+{
+  inputs,
+  lib,
+  config,
+  pkgs,
+  ...
+}: {
   imports = [
     ./hardware-configuration.nix
   ];
@@ -26,38 +32,38 @@
 
   networking = {
     hostName = "mbp";
-    useNetworkd= true;
+    useNetworkd = true;
     firewall.enable = false;
   };
 
   systemd.network.enable = true;
-  
+
   time.timeZone = "US/Pacific";
   i18n.defaultLocale = "en_US.UTF-8";
   console = {
     #earlySetup = true;
-    packages = [ pkgs.kbd pkgs.terminus_font pkgs.powerline-fonts ];
+    packages = [pkgs.kbd pkgs.terminus_font pkgs.powerline-fonts];
     #font = "${pkgs.terminus_font}/share/consolefonts/ter-v32n.psf.gz";
     font = "${pkgs.powerline-fonts}/share/consolefonts/ter-powerline-v20b.psf.gz";
     keyMap = "us";
     colors = [
-    "002b36" # base03, background
-    "dc322f" # red
-    "859900" # green
-    "b58900" # yellow
-    "268bd2" # blue
-    "d33682" # magenta
-    "2aa198" # cyan
-    "eee8d5" # base2, foreground
-    "073642" # base02, bright background
-    "cb4b16" # bright red
-    "586e75" # base01, bright green
-    "657b83" # base00, bright yellow
-    "839496" # base0, bright blue
-    "6c71c4" # violet, bright magenta
-    "93a1a1" # base1, bright cyan
-    "fdf6e3" # base3, bright foreground
-  ];
+      "002b36" # base03, background
+      "dc322f" # red
+      "859900" # green
+      "b58900" # yellow
+      "268bd2" # blue
+      "d33682" # magenta
+      "2aa198" # cyan
+      "eee8d5" # base2, foreground
+      "073642" # base02, bright background
+      "cb4b16" # bright red
+      "586e75" # base01, bright green
+      "657b83" # base00, bright yellow
+      "839496" # base0, bright blue
+      "6c71c4" # violet, bright magenta
+      "93a1a1" # base1, bright cyan
+      "fdf6e3" # base3, bright foreground
+    ];
     # colors = [
     #   "002635"
     #   "00384d"
@@ -80,32 +86,32 @@
 
   users = {
     mutableUsers = true;
-      groups.tim.name = "tim";
-      groups.tim.gid = 1000;
-      groups.tim.members = [ "tim" ];
-      users.tim = {
-        isNormalUser = true;
-        shell = pkgs.zsh;
-        group = "tim";
-        initialHashedPassword = "";
-        extraGroups = [ "users" "wheel" "podman" ];
-        autoSubUidGidRange = true;
-        # was playing with uid/gid for rootless podman...
-        # subUidRanges = [{ startUid = 100000; count = 65536; }];
-        # subGidRanges = [{ startGid = 100000; count = 65536; }];
-        openssh.authorizedKeys.keys = [
-        ];
-        packages = with pkgs; [
-          inputs.home-manager.packages.${pkgs.system}.default
-        ];
+    groups.tim.name = "tim";
+    groups.tim.gid = 1000;
+    groups.tim.members = ["tim"];
+    users.tim = {
+      isNormalUser = true;
+      shell = pkgs.zsh;
+      group = "tim";
+      initialHashedPassword = "";
+      extraGroups = ["users" "wheel" "podman"];
+      autoSubUidGidRange = true;
+      # was playing with uid/gid for rootless podman...
+      # subUidRanges = [{ startUid = 100000; count = 65536; }];
+      # subGidRanges = [{ startGid = 100000; count = 65536; }];
+      openssh.authorizedKeys.keys = [
+      ];
+      packages = with pkgs; [
+        inputs.home-manager.packages.${pkgs.system}.default
+      ];
     };
   };
-  
+
   security.sudo.wheelNeedsPassword = false;
 
   programs.gnupg.agent.enable = true;
   programs.gnupg.agent.enableSSHSupport = true;
-  
+
   programs.zsh.enable = true;
   programs.zsh.syntaxHighlighting.enable = true;
   programs.zsh.enableCompletion = true;
@@ -121,7 +127,7 @@
   programs.zsh.interactiveShellInit = ''
     bindkey -v
     bindkey '^R' history-incremental-search-backward
-'';
+  '';
   programs.zsh.promptInit = ''
     # Note that to manually override this in ~/.zshrc you should run `prompt off`
     # before setting your PS1 and etc. Otherwise this will likely to interact with
@@ -138,10 +144,11 @@
     PS1='%n@%m %F{red}%/%f$vcs_info_msg_0_ $ '
   '';
   programs.zsh.histSize = 10000;
-  
+
   environment = {
-    systemPackages = with pkgs; [ 
+    systemPackages = with pkgs; [
       kbd
+      makemkv
       terminus_font
       powerline-fonts
     ];
@@ -204,20 +211,20 @@
   #   #   ];
   #   # };
   # };
-  
+
   services = {
     openssh = {
-        enable = true;
-        settings = {
+      enable = true;
+      settings = {
         PermitRootLogin = "no";
         PasswordAuthentication = true;
-        };
+      };
     };
     xserver.enable = false;
     printing.enable = false;
     pipewire = {
-        enable = false;
-        pulse.enable = false;
+      enable = false;
+      pulse.enable = false;
     };
     # Enable touchpad support (enabled default in most desktopManager).
     libinput.enable = true;

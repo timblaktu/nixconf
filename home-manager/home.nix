@@ -56,7 +56,25 @@
           level = 16;
           logFile = "/tmp/nvim.log";
         };
-
+        undoFile = {
+          enable = true;
+          path = "~/.local/share/nvim/undo";
+        };
+        options = {
+          tabstop = 4;
+          autoindent = true;
+          shiftwidth = 4;
+          wrap = false;
+          splitbelow = true;
+          splitright = true;
+          cmdheight = 1;
+          signcolumn = "yes";
+          mouse = "a";
+          searchcase = "smart";
+          swapfile = false;
+        };
+        # keymaps = {
+        # };
         spellcheck = {
           enable = true;
         };

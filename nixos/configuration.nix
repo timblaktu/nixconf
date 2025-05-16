@@ -34,6 +34,17 @@
     hostName = "mbp";
     useNetworkd = true;
     firewall.enable = false;
+    wireless = {
+      enable = true;
+      networks = {
+        "SUMMIT-VIS" = {
+          psk = "summ1tv1s1t0r";
+        };
+        "zarf" = {
+          psk = "c0rnp177a";
+        };
+      };
+    };
   };
 
   systemd.network.enable = true;
